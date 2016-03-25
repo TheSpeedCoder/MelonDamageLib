@@ -1,3 +1,5 @@
+![Screenshot](https://s3.amazonaws.com/f.cl.ly/items/1J0W0i1b1C1M1H2Y3N2C/Image%202016-03-25%20at%202.07.21%20AM.png?v=62209310)
+
 # MelonDamageLib
 Better Damage Management and Kill Assist Tracker
 
