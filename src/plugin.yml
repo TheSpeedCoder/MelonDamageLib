@@ -1,0 +1,5 @@
+name: MelonDamageLib
+author: Turqmelon
+version: 1.0
+main: com.turqmelon.MelonDamageLib.DamageLib
+description: Tracks and summarizes causes of death
