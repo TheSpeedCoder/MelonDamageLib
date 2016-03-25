@@ -6,6 +6,7 @@ package com.turqmelon.MelonDamageLib.damage;
  ******************************************************************************/
 
 import com.turqmelon.MelonDamageLib.DamageLib;
+import com.turqmelon.MelonDamageLib.utils.LocationUtil;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -28,6 +29,11 @@ public class BlockDamageTick extends DamageTick {
 
     public Location getLocation() {
         return location;
+    }
+
+    @Override
+    public boolean matches(DamageTick tick) {
+        return (tick instanceof BlockDamageTick) && ((BlockDamageTick) tick).getType().equals(getType()) && LocationUtil.samePlace(getLocation(), ((BlockDamageTick) tick).getLocation());
     }
 
     @Override

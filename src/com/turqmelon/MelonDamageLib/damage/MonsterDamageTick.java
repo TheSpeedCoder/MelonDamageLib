@@ -68,6 +68,11 @@ public class MonsterDamageTick extends DamageTick {
     }
 
     @Override
+    public boolean matches(DamageTick tick) {
+        return (tick instanceof MonsterDamageTick) && getEntity().getUniqueId().equals(((MonsterDamageTick) tick).getEntity().getUniqueId());
+    }
+
+    @Override
     public String getDeathMessage(Player player) {
         return getDeathMessageTemplate(player).replace("{KILLER}", EntityUtil.getEntityName(getEntity()));
 

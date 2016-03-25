@@ -36,6 +36,8 @@ public abstract class DamageTick implements Comparable {
         return 0;
     }
 
+    public abstract boolean matches(DamageTick tick);
+
     public abstract String getDeathMessage(Player player);
 
     public abstract String getSingleLineSummary();

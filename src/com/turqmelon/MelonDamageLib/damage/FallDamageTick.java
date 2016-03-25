@@ -25,6 +25,11 @@ public class FallDamageTick extends DamageTick {
     }
 
     @Override
+    public boolean matches(DamageTick tick) {
+        return false;
+    }
+
+    @Override
     public String getDeathMessage(Player player) {
         DecimalFormat df = new DecimalFormat("#");
         return DamageLib.ACCENT_COLOR + player.getDisplayName() + DamageLib.BASE_COLOR + " was killed by " + DamageLib.ACCENT_COLOR + df.format(getDistance()) + DamageLib.BASE_COLOR + " block fall";

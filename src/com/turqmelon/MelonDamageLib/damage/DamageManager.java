@@ -6,7 +6,6 @@ package com.turqmelon.MelonDamageLib.damage;
  ******************************************************************************/
 
 import com.turqmelon.MelonDamageLib.DamageLib;
-import com.turqmelon.MelonDamageLib.utils.LocationUtil;
 import org.bukkit.ChatColor;
 
 import java.text.DecimalFormat;
@@ -87,23 +86,8 @@ public class DamageManager {
 
     public static DamageTick getLoggedTick(UUID uuid, DamageTick newTick){
         for(DamageTick tick : getLoggedTicks(uuid)){
-            if (tick.getCause() == newTick.getCause()){
-                if ((newTick instanceof FallDamageTick) && (tick instanceof FallDamageTick)){
-                }
-                else if ((newTick instanceof MonsterDamageTick) && (tick instanceof MonsterDamageTick)){
-                    if (((MonsterDamageTick) newTick).getEntity().getUniqueId().equals(((MonsterDamageTick) tick).getEntity().getUniqueId())){
-                        return tick;
-                    }
-                }
-                else if ((newTick instanceof BlockDamageTick) && (tick instanceof BlockDamageTick)){
-                    if (((BlockDamageTick) newTick).getType() == ((BlockDamageTick) tick).getType() &&
-                            LocationUtil.samePlace(((BlockDamageTick) newTick).getLocation(), ((BlockDamageTick) tick).getLocation())){
-                        return tick;
-                    }
-                }
-                else{
-                    return tick;
-                }
+            if (tick.getCause() == newTick.getCause() && tick.matches(newTick)) {
+                return tick;
             }
         }
         return null;
