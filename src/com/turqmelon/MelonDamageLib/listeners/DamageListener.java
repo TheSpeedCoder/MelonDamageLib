@@ -52,10 +52,12 @@ public class DamageListener implements Listener {
 
             }
             else if ((damager instanceof TNTPrimed)){
-                if(((TNTPrimed) damager).getSource() != null){
-                    item = new TNTDamageTick(dmg, EntityDamageEvent.DamageCause.ENTITY_EXPLOSION, "TNT", System.currentTimeMillis(), damager.getLocation(), (Player) ((TNTPrimed) damager).getSource());
+                TNTPrimed tnt = (TNTPrimed) damager;
+                if (tnt.getSource() != null && ((tnt.getSource() instanceof Player))) {
+                    item = new TNTDamageTick(dmg, "TNT", System.currentTimeMillis(), (Player) tnt.getSource(), tnt.getLocation());
+                } else {
+                    item = new BlockDamageTick(dmg, EntityDamageEvent.DamageCause.ENTITY_EXPLOSION, "TNT", System.currentTimeMillis(), Material.TNT, damager.getLocation());
                 }
-                else item = new BlockDamageTick(dmg, EntityDamageEvent.DamageCause.ENTITY_EXPLOSION, "TNT", System.currentTimeMillis(), Material.TNT, damager.getLocation());
             }
 
             if (attacker != null){
