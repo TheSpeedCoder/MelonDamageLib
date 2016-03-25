@@ -5,8 +5,10 @@ package com.turqmelon.MelonDamageLib.listeners;
  * For more information, see LICENSE.TXT.                                     *
  ******************************************************************************/
 
+import com.turqmelon.MelonDamageLib.api.EntityDamagedByPlayerTNTEvent;
 import com.turqmelon.MelonDamageLib.damage.*;
 import org.apache.commons.lang.WordUtils;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
@@ -18,7 +20,7 @@ import org.bukkit.event.entity.EntityDamageEvent;
 
 public class DamageListener implements Listener {
 
-    @EventHandler(priority = EventPriority.MONITOR)
+    @EventHandler(priority = EventPriority.HIGHEST)
     public void onDamage(EntityDamageEvent event){
 
         Entity entity = event.getEntity();
@@ -27,7 +29,7 @@ public class DamageListener implements Listener {
         }
 
         DamageTick item = null;
-        double dmg = event.getDamage(EntityDamageEvent.DamageModifier.BASE);
+        double dmg = event.getFinalDamage();
 
         if (event.isCancelled() || dmg == 0)return;
 
@@ -54,6 +56,13 @@ public class DamageListener implements Listener {
             else if ((damager instanceof TNTPrimed)){
                 TNTPrimed tnt = (TNTPrimed) damager;
                 if (tnt.getSource() != null && ((tnt.getSource() instanceof Player)) && !tnt.getSource().getUniqueId().equals(entity.getUniqueId())) {
+
+                    EntityDamagedByPlayerTNTEvent e = new EntityDamagedByPlayerTNTEvent((Player) tnt.getSource(), entity, tnt, dmg);
+                    Bukkit.getPluginManager().callEvent(e);
+                    if (e.isCancelled()) {
+                        event.setCancelled(true);
+                        return;
+                    }
                     item = new TNTDamageTick(dmg, "TNT", System.currentTimeMillis(), (Player) tnt.getSource(), tnt.getLocation());
                 } else {
                     item = new BlockDamageTick(dmg, EntityDamageEvent.DamageCause.ENTITY_EXPLOSION, "TNT", System.currentTimeMillis(), Material.TNT, damager.getLocation());
