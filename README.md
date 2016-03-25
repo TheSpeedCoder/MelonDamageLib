@@ -47,4 +47,4 @@ If cancelled, the damage will be negated and the damage won't be logged to the e
 
 __Pull requests welcome. I'll be updating this resource as I need it for my own projects. You're welcome to use it, as long as you contribute whatever changes you've made. See the LICENSE.TXT for more info.__
 
-[Download MelonDamageLib.jar](http://up.turqmelon.com/2a213V1T071w)
+[Download MelonDamageLib.jar](http://up.turqmelon.com/371s3A0Q2V0n)
