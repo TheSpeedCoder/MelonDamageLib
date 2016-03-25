@@ -39,3 +39,5 @@ For an assist to be registered, the cause of death must not match the player on 
 By default, KillAssists are only used to modify the death message, however this event can be listened for by other plugins for more accurate statistic tracking.
 
 __Pull requests welcome. I'll be updating this resource as I need it for my own projects. You're welcome to use it, as long as you contribute whatever changes you've made. See the LICENSE.TXT for more info.__
+
+[Download MelonDamageLib.jar](http://up.turqmelon.com/2a213V1T071w)
