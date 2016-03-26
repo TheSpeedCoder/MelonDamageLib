@@ -99,10 +99,16 @@ public class DamageListener implements Listener {
                 item = new FallDamageTick(dmg, "Fall", System.currentTimeMillis(), entity.getFallDistance());
             }
             else{
-                String name = event.getCause().name();
+
+                EntityDamageEvent.DamageCause cause = event.getCause();
+                if (cause == EntityDamageEvent.DamageCause.FIRE_TICK) {
+                    cause = EntityDamageEvent.DamageCause.FIRE;
+                }
+
+                String name = cause.name();
                 name = WordUtils.capitalizeFully(name).replace("_", " ");
 
-                item = new OtherDamageTick(dmg, event.getCause(), name, System.currentTimeMillis());
+                item = new OtherDamageTick(dmg, cause, name, System.currentTimeMillis());
             }
 
         }
