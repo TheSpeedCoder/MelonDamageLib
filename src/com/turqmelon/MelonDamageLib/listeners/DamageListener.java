@@ -10,6 +10,7 @@ import com.turqmelon.MelonDamageLib.damage.*;
 import org.apache.commons.lang.WordUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.block.Block;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -91,7 +92,12 @@ public class DamageListener implements Listener {
         }
         else if ((event instanceof EntityDamageByBlockEvent)){
             EntityDamageByBlockEvent evt = (EntityDamageByBlockEvent)event;
-            item = new BlockDamageTick(dmg, EntityDamageEvent.DamageCause.BLOCK_EXPLOSION, "BLOCK", System.currentTimeMillis(), evt.getDamager().getType(), evt.getDamager().getLocation());
+            Block block = evt.getDamager();
+            if (block != null && block.getType() != Material.AIR) {
+                item = new BlockDamageTick(dmg, EntityDamageEvent.DamageCause.BLOCK_EXPLOSION, "BLOCK", System.currentTimeMillis(), block.getType(), block.getLocation());
+            } else {
+                item = getOtherTick(event, dmg);
+            }
         }
         else{
 
@@ -99,16 +105,7 @@ public class DamageListener implements Listener {
                 item = new FallDamageTick(dmg, "Fall", System.currentTimeMillis(), entity.getFallDistance());
             }
             else{
-
-                EntityDamageEvent.DamageCause cause = event.getCause();
-                if (cause == EntityDamageEvent.DamageCause.FIRE_TICK) {
-                    cause = EntityDamageEvent.DamageCause.FIRE;
-                }
-
-                String name = cause.name();
-                name = WordUtils.capitalizeFully(name).replace("_", " ");
-
-                item = new OtherDamageTick(dmg, cause, name, System.currentTimeMillis());
+                item = getOtherTick(event, dmg);
             }
 
         }
@@ -116,6 +113,18 @@ public class DamageListener implements Listener {
         if (item != null){
             DamageManager.logTick(entity.getUniqueId(), item);
         }
+    }
+
+    private OtherDamageTick getOtherTick(EntityDamageEvent event, double dmg) {
+        EntityDamageEvent.DamageCause cause = event.getCause();
+        if (cause == EntityDamageEvent.DamageCause.FIRE_TICK) {
+            cause = EntityDamageEvent.DamageCause.FIRE;
+        }
+
+        String name = cause.name();
+        name = WordUtils.capitalizeFully(name).replace("_", " ");
+
+        return new OtherDamageTick(dmg, cause, name, System.currentTimeMillis());
     }
 
 }
