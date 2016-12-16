@@ -13,6 +13,7 @@ import java.util.*;
 
 public class DamageManager {
 
+    //TODO: Expire ticks automatically after x mount of time
     private static Map<UUID, List<DamageTick>> damageTicks = new HashMap<>();
 
     public static void dump(UUID uuid){

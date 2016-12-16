@@ -5,6 +5,7 @@ package com.turqmelon.MelonDamageLib;
  * For more information, see LICENSE.TXT.                                     *
  ******************************************************************************/
 
+import com.turqmelon.MelonDamageLib.listeners.ConnectionListner;
 import com.turqmelon.MelonDamageLib.listeners.DamageListener;
 import com.turqmelon.MelonDamageLib.listeners.DeathListener;
 import org.bukkit.ChatColor;
@@ -22,5 +23,6 @@ public class DamageLib extends JavaPlugin {
     public void onEnable() {
         getServer().getPluginManager().registerEvents(new DamageListener(), this);
         getServer().getPluginManager().registerEvents(new DeathListener(), this);
+        getServer().getPluginManager().registerEvents(new ConnectionListner(), this);
     }
 }
