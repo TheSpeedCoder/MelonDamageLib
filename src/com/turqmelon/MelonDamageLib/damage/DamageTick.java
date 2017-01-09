@@ -71,7 +71,7 @@ public abstract class DamageTick implements Comparable {
         return cause;
     }
 
-    public String getName() {
+    public String getEntityName() {
         return name;
     }
 

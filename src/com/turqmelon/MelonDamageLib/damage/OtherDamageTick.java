@@ -17,16 +17,16 @@ public class OtherDamageTick extends DamageTick {
 
     @Override
     public boolean matches(DamageTick tick) {
-        return (tick instanceof OtherDamageTick) && tick.getName().equals(getName());
+        return (tick instanceof OtherDamageTick) && tick.getEntityName().equals(getEntityName());
     }
 
     @Override
     public String getDeathMessage(Player player) {
-        return DamageLib.ACCENT_COLOR + player.getDisplayName() + DamageLib.BASE_COLOR + " was killed by " + DamageLib.ACCENT_COLOR + getName();
+        return DamageLib.ACCENT_COLOR + player.getDisplayName() + DamageLib.BASE_COLOR + " was killed by " + DamageLib.ACCENT_COLOR + getEntityName();
     }
 
     @Override
     public String getSingleLineSummary() {
-        return DamageLib.ACCENT_COLOR + getName() + DamageLib.BASE_COLOR + " damage";
+        return DamageLib.ACCENT_COLOR + getEntityName() + DamageLib.BASE_COLOR + " damage";
     }
 }

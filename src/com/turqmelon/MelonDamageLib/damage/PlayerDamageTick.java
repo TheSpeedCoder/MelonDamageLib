@@ -6,6 +6,7 @@ package com.turqmelon.MelonDamageLib.damage;
  ******************************************************************************/
 
 import com.turqmelon.MelonDamageLib.DamageLib;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 import java.text.DecimalFormat;
@@ -21,7 +22,7 @@ public class PlayerDamageTick extends MonsterDamageTick {
     }
 
     public Player getPlayer() {
-        return (Player)getEntity();
+        return Bukkit.getPlayer(this.getEntityUUID());
     }
 
     @Override
